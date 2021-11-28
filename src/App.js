@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import twitterLogo from './assets/twitter-logo.svg'
 import './App.css'
 
-const { SystemProgram, Keypair } = web3
+const { SystemProgram } = web3
 
 const arr = Object.values(kp._keypair.secretKey)
 const secret = new Uint8Array(arr)
@@ -19,16 +19,8 @@ const opts = {
   preflightCommitment: 'processed'
 }
 
-// Constants
 const TWITTER_HANDLE = 'RailsQuest'
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`
-
-const TEST_GIFS = [
-  'https://media.giphy.com/media/1ZDHBI83x55sdxsejk/giphy.gif',
-  'https://media.giphy.com/media/BdghqxNFV4efm/giphy.gif',
-  'https://media.giphy.com/media/fV0oSDsZ4UgdW/giphy.gif',
-  'https://media.giphy.com/media/V2ojLo7PvhVug/giphy.gif'
-]
 
 export default () => {
   const [walletAddress, setWalletAddress] = useState(null)
@@ -51,7 +43,7 @@ export default () => {
   useEffect(() => {
     window.addEventListener('load', handleLoad)
     return () => window.removeEventListener('load', handleLoad)
-  }, [])
+  })
 
   useEffect(() => {
     if (walletAddress) {
@@ -135,7 +127,7 @@ function renderConnectedContainer ({ gifList, setGifList, inputValue, setInputVa
           {/* We use index as the key instead, also, the src is now item.gifLink */}
           {gifList?.map((item, index) => (
             <div className='gif-item' key={index}>
-              <img src={item.gifLink} />
+              <img src={item.gifLink} alt={item.gifLink} />
             </div>
           ))}
         </div>
